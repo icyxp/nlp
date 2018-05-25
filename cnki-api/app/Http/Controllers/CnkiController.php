@@ -52,7 +52,7 @@ class CnkiController
         $datas = [];
         foreach ($patents as $p) {
             $num = $patent2Similarity[$p->id] * 100;
-            $sr = number_format($num, 2) . '%';
+            $sr = floor($num) . '%';
             $d = [
                 'id' => $p->id,
                 'original_name' => $p->original_name,
