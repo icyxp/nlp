@@ -58,7 +58,7 @@ def index():
                      for line in open('dict/stopword.dic').readlines()])
 
     dictionary = corpora.Dictionary.load("dict/dict.txt")
-    tfidf = models.TfidfModel.load("dict/data.tfidf")
+    #tfidf = models.TfidfModel.load("dict/data.tfidf")
     corpus = corpora.MmCorpus('dict/corpuse.mm')
 
     tfidf_model = models.TfidfModel(corpus)
