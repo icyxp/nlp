@@ -41,11 +41,11 @@ def index():
         conn.close()
 
     stopwords = set([line.strip()
-                     for line in open('stopword.dic').readlines()])
+                     for line in open('dict/stopword.dic').readlines()])
 
-    dictionary = corpora.Dictionary.load("dict.txt")
-    tfidf = models.TfidfModel.load("data.tfidf")
-    corpus = corpora.MmCorpus('corpuse.mm')
+    dictionary = corpora.Dictionary.load("dict/dict.txt")
+    tfidf = models.TfidfModel.load("dict/data.tfidf")
+    corpus = corpora.MmCorpus('dict/corpuse.mm')
 
     tfidf_model = models.TfidfModel(corpus)
     corpus_tfidf = tfidf_model[corpus]
@@ -53,7 +53,7 @@ def index():
     lsi = models.LsiModel(corpus_tfidf)
     corpus_lsi = lsi[corpus_tfidf]
     similarity_lsi = similarities.Similarity(
-        'Similarity-LSI-index', corpus_lsi, num_features=400, num_best=2)
+        'dict/Similarity-LSI-index', corpus_lsi, num_features=400, num_best=2)
 
     test_data_3 = '随着互联网的发展和普及,域名系统作为互联网的重要基础设施,对人们的网络生活有着至关重要的影响。而DNS(域名系统)递归服务器,作为和客户端直接交互的域名服务器,其健康状况和服务质量直接关系到用户获取到的解析数据的完整性、正确性和及时性。因此,如何为用户推荐健康状况好、服务质量优的DNS递归服务器成为如今网络安全领域中亟待解决的问题。本文通过探测获取DNS递归服务器基础信息和服务质量,提出了DNS递归服务器健康状况评估模型和服务质量评估模型,并设计实现了DNS递归服务器推荐系统,为用户推荐适合的、健康状况好、服务质量优的DNS递归服务器。首先,本文介绍了DNS相关理论,包括DNS基础理论、DNS信息探测的相关理论和方法以及DNS评价与推荐的相关理论和方法。其次,本文设计并实现了DNS递归服务器推荐系统。该系统分为数据探测、数据分析和推荐评价三个模块。其中数据探测包括DNS递归服务器基础信息探测和服务质量探测,探测了DNS类型、协议支持情况、软件版本信息、漏洞信息等基础信息,以及网络性能和DNS可解析性等服务质量。数据分析包括DNS递归服务器健康状况评估和服务质量评估,分别采用层次分析法和复相关系数法,对基础信息探测结果和服务质量探测结果进行了分析,得到了DNS递归服务器健康状况评估值和服务质量评估值。推荐评价包括综合推荐和当前服务器评价,根据健康状况评估结果和服务质量评估结果,向用户推荐适合的、健康状况好、服务质量优的DNS递归服务器,同时可以对用户当前DNS服务器进行评价。最后,本文测试了DNS递归服务器推荐系统,从功能和性能两个方面对系统的每个模块及其子模块进行了测试。综上所述,本文完成了DNS递归服务器推荐系统。通过系统测试表明,该系统满足设计目标。'
     test_cut_raw_3 = list(jieba.cut(test_data_3))         # 1.分词
