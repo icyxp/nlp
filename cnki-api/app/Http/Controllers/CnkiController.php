@@ -48,6 +48,7 @@ class CnkiController
             $patentIds[] = $patentId;
         }
         $patents = Patent::find($patentIds);
+        $patentId2Datas = [];
         $datas = [];
         foreach ($patents as $p) {
             $sr = round($patent2Similarity[$p->id] * 100, 2) . '%';
@@ -58,7 +59,12 @@ class CnkiController
                 'abstract' => $p->internalStage->abstract,
                 'similar_rate' => $sr
             ];
-            $datas[] = $d;
+            $patentId2Datas[$p->id] = $d;
+        }
+        foreach ($patent2Similarity as $pId => $s) {
+            if (isset($patentId2Datas[$pId])) {
+                $datas[] = $patentId2Datas[$pId];
+            }
         }
         return $datas;
     }

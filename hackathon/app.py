@@ -61,10 +61,10 @@ def index():
     tfidf_model = models.TfidfModel(corpus)
     corpus_tfidf = tfidf_model[corpus]
 
-    lsi = models.LsiModel(corpus_tfidf, num_topics=200)
+    lsi = models.LsiModel(corpus_tfidf, num_topics=100)
     corpus_lsi = lsi[corpus_tfidf]
     similarity_lsi = similarities.Similarity(
-        'dict/Similarity-LSI-index', corpus_lsi, num_features=200, num_best=20)
+        'dict/Similarity-LSI-index', corpus_lsi, num_features=100, num_best=20)
 
     test_cut_raw_3 = list(jieba.cut(proposal))         # 1.分词
     cleaned_words_list3 = remove_stopwords(test_cut_raw_3, stopwords)
