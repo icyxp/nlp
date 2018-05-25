@@ -1,0 +1,5 @@
+flask
+gensim
+jieba
+configparser
+mysql-python
