@@ -4826,7 +4826,6 @@ module.exports = function spread(callback) {
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data() {
@@ -4843,13 +4842,6 @@ module.exports = function spread(callback) {
       let uuid = response.result;
       let path = '/result/' + uuid;
       this.$router.push({ path: path });
-    },
-    failUpload: function (err, file, fileList) {
-      this.$notify.error({
-        title: '错误',
-        message: '处理内部错误',
-        duration: 10
-      });
     }
   }
 });
@@ -4910,7 +4902,7 @@ module.exports = function spread(callback) {
   },
   methods: {
     loadData(uuid) {
-      let url = 'http://api.cnki.local/api/result/' + uuid;
+      let url = 'http://api-cnki.innosnap.local/api/result/' + uuid;
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(response => {
         console.log(response);
         this.patents = response.data;
@@ -6934,7 +6926,7 @@ exports = module.exports = __webpack_require__(24)(true);
 
 
 // module
-exports.push([module.i, "\n.el-upload-dragger .el-upload__text em {\n  color: rgb(100, 177, 5);\n}\n.el-upload-dragger:hover {\n  border: 1px dashed rgb(100, 177, 5);\n}\n", "", {"version":3,"sources":["/Users/jianpinglu/workspace/zhihuiya/cnki/src/pages/index/src/pages/index/index.vue?3db01ed5"],"names":[],"mappings":";AAqDA;EACA,wBAAA;CACA;AACA;EACA,oCAAA;CACA","file":"index.vue","sourcesContent":["<template>\n\n      <div>\n        <el-upload \n            style=\"padding-top: 50px\"\n            class=\"upload-demo\"\n            drag\n            action=\"http://api.cnki.local/api/upload\"\n            name=\"file\"\n            multiple\n            :on-success=\"successUpload\"\n            :before-upload=\"beforeUpload\"\n            :on-error=\"failUpload\"\n            v-loading=\"fullscreenLoading\"\n          >\n            <i class=\"el-icon-upload\"></i>\n            <div class=\"el-upload__text\">将提案文件拖到此处，或<em>点击上传</em></div>\n            <div class=\"el-upload__tip\" slot=\"tip\">支持上传txt/word/pdf/jpg/png文件，上传成功后进行自动查重</div>\n          </el-upload>\n          \n      </div>\n            \n</template>\n\n<script>\nexport default {\n  data() {\n      return {\n        fullscreenLoading: false\n      }\n  },\n  methods: {\n    beforeUpload: function(){\n      this.fullscreenLoading = true\n    },\n    successUpload: function(response, file, fileList) {\n      this.fullscreenLoading = false\n      let uuid = response.result\n      let path = '/result/' + uuid\n      this.$router.push({ path: path})\n    },\n    failUpload: function(err, file, fileList) {\n      this.$notify.error({\n          title: '错误',\n          message: '处理内部错误',\n          duration: 10\n        });\n    }\n  }\n}\n</script>\n\n<style>\n.el-upload-dragger .el-upload__text em {\n  color: rgb(100, 177, 5);\n}\n.el-upload-dragger:hover {\n  border: 1px dashed rgb(100, 177, 5);\n}\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.el-upload-dragger .el-upload__text em {\n  color: rgb(100, 177, 5);\n}\n.el-upload-dragger:hover {\n  border: 1px dashed rgb(100, 177, 5);\n}\n", "", {"version":3,"sources":["/Users/jianpinglu/workspace/zhihuiya/cnki/src/pages/index/src/pages/index/index.vue?5e734b1f"],"names":[],"mappings":";AA6CA;EACA,wBAAA;CACA;AACA;EACA,oCAAA;CACA","file":"index.vue","sourcesContent":["<template>\n\n      <div>\n        <el-upload \n            style=\"padding-top: 50px\"\n            class=\"upload-demo\"\n            drag\n            action=\"http://api-cnki.innosnap.local/api/upload\"\n            name=\"file\"\n            multiple\n            :on-success=\"successUpload\"\n            :before-upload=\"beforeUpload\"\n            v-loading=\"fullscreenLoading\"\n          >\n            <i class=\"el-icon-upload\"></i>\n            <div class=\"el-upload__text\">将提案文件拖到此处，或<em>点击上传</em></div>\n            <div class=\"el-upload__tip\" slot=\"tip\">支持上传txt/word/pdf/jpg/png文件，上传成功后进行自动查重</div>\n          </el-upload>\n          \n      </div>\n            \n</template>\n\n<script>\nexport default {\n  data() {\n      return {\n        fullscreenLoading: false\n      }\n  },\n  methods: {\n    beforeUpload: function(){\n      this.fullscreenLoading = true\n    },\n    successUpload: function(response, file, fileList) {\n      this.fullscreenLoading = false\n      let uuid = response.result\n      let path = '/result/' + uuid\n      this.$router.push({ path: path})\n    }\n  }\n}\n</script>\n\n<style>\n.el-upload-dragger .el-upload__text em {\n  color: rgb(100, 177, 5);\n}\n.el-upload-dragger:hover {\n  border: 1px dashed rgb(100, 177, 5);\n}\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -6948,7 +6940,7 @@ exports = module.exports = __webpack_require__(24)(true);
 
 
 // module
-exports.push([module.i, "\n.demo-block {\n    border: 1px solid #ebebeb;\n    border-radius: 3px;\n    transition: .2s;\n}\n", "", {"version":3,"sources":["/Users/jianpinglu/workspace/zhihuiya/cnki/src/pages/result/src/pages/result/result.vue?3eb2e094"],"names":[],"mappings":";AAgEA;IACA,0BAAA;IACA,mBAAA;IACA,gBAAA;CACA","file":"result.vue","sourcesContent":["<template>\n    <div class=\"demo-block demo-box demo-zh-CN demo-table\">\n      <el-table\n        :data=\"patents\"\n        fit\n        stripe\n        border\n        >\n        <el-table-column\n          prop=\"patent_name\"\n          label=\"提案名称\"\n          width=\"200\"\n          >\n        </el-table-column>\n        \n        <el-table-column\n          prop=\"similar_rate\"\n          label=\"相似度\"\n          width=\"80\"\n          >\n        </el-table-column>\n\n        <el-table-column\n          prop=\"abstract\"\n          label=\"摘要\"\n          >\n        </el-table-column>\n\n      </el-table>\n    </el-table>\n  </div>\n</template>\n\n<script>\nimport axios from 'axios'\n\nexport default {\n      data() {\n        return {\n          patents: []\n        }\n      },\n      created: function () { \n        let uuid = this.$route.params.uuid\n        console.log(uuid)\n        this.loadData(uuid)\n      },\n      methods: {\n        loadData(uuid){\n          let url = 'http://api.cnki.local/api/result/' + uuid\n          axios.get(url)\n          .then((response) => {\n            console.log(response);\n            this.patents = response.data\n          })\n          .catch((error) => {\n            console.log(error);\n          });\n        }\n      }\n    }\n</script>\n\n<style>\n.demo-block {\n    border: 1px solid #ebebeb;\n    border-radius: 3px;\n    transition: .2s;\n}\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.demo-block {\n    border: 1px solid #ebebeb;\n    border-radius: 3px;\n    transition: .2s;\n}\n", "", {"version":3,"sources":["/Users/jianpinglu/workspace/zhihuiya/cnki/src/pages/result/src/pages/result/result.vue?6dd714da"],"names":[],"mappings":";AAgEA;IACA,0BAAA;IACA,mBAAA;IACA,gBAAA;CACA","file":"result.vue","sourcesContent":["<template>\n    <div class=\"demo-block demo-box demo-zh-CN demo-table\">\n      <el-table\n        :data=\"patents\"\n        fit\n        stripe\n        border\n        >\n        <el-table-column\n          prop=\"patent_name\"\n          label=\"提案名称\"\n          width=\"200\"\n          >\n        </el-table-column>\n        \n        <el-table-column\n          prop=\"similar_rate\"\n          label=\"相似度\"\n          width=\"80\"\n          >\n        </el-table-column>\n\n        <el-table-column\n          prop=\"abstract\"\n          label=\"摘要\"\n          >\n        </el-table-column>\n\n      </el-table>\n    </el-table>\n  </div>\n</template>\n\n<script>\nimport axios from 'axios'\n\nexport default {\n      data() {\n        return {\n          patents: []\n        }\n      },\n      created: function () { \n        let uuid = this.$route.params.uuid\n        console.log(uuid)\n        this.loadData(uuid)\n      },\n      methods: {\n        loadData(uuid){\n          let url = 'http://api-cnki.innosnap.local/api/result/' + uuid\n          axios.get(url)\n          .then((response) => {\n            console.log(response);\n            this.patents = response.data\n          })\n          .catch((error) => {\n            console.log(error);\n          });\n        }\n      }\n    }\n</script>\n\n<style>\n.demo-block {\n    border: 1px solid #ebebeb;\n    border-radius: 3px;\n    transition: .2s;\n}\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -7529,12 +7521,11 @@ var render = function() {
           staticStyle: { "padding-top": "50px" },
           attrs: {
             drag: "",
-            action: "http://api.cnki.local/api/upload",
+            action: "http://api-cnki.innosnap.local/api/upload",
             name: "file",
             multiple: "",
             "on-success": _vm.successUpload,
-            "before-upload": _vm.beforeUpload,
-            "on-error": _vm.failUpload
+            "before-upload": _vm.beforeUpload
           }
         },
         [
@@ -7777,4 +7768,4 @@ module.exports = function listToStyles (parentId, list) {
 
 /***/ })
 ],[125]);
-//# sourceMappingURL=index.js.map?336205e75d14ce8c3cd5
+//# sourceMappingURL=index.js.map?43507f9a7b9e44766f1a

@@ -5,7 +5,7 @@
             style="padding-top: 50px"
             class="upload-demo"
             drag
-            action="http://api.cnki.local/api/upload"
+            action="http://api-cnki.innosnap.local/api/upload"
             name="file"
             multiple
             :on-success="successUpload"

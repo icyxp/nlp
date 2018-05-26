@@ -47,7 +47,7 @@ export default {
       },
       methods: {
         loadData(uuid){
-          let url = 'http://api.cnki.local/api/result/' + uuid
+          let url = 'http://api-cnki.innosnap.local/api/result/' + uuid
           axios.get(url)
           .then((response) => {
             console.log(response);
